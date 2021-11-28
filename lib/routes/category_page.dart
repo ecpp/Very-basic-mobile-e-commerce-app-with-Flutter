@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cs310group28/navigation_bar.dart';
 import 'package:cs310group28/main.dart';
 
+
 class Hats extends StatefulWidget {
   @override
   _HatsState createState() => _HatsState();
