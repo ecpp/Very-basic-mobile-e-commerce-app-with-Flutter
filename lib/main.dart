@@ -27,7 +27,7 @@ class _NavBarState extends State<NavigationBar> {
                 title: Text('Sign In', style: navText),
                 onTap: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => LogIn()));
+                      .push(MaterialPageRoute(builder: (context) => LoginScreen()));
                 }),
           if (loginStatus == true)
             ListTile(
