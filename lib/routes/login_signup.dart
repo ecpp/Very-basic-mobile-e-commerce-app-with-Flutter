@@ -35,6 +35,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterLogin(
       theme: LoginTheme(pageColorLight: Colors.red),
+
       title: 'Welcome',
       //onLogin: _authUser,
       //onSignup: _authUser,

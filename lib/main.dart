@@ -1,15 +1,26 @@
 import 'dart:async';
-//test123
 import 'package:flutter/material.dart';
+
+import 'package:cs310group28/onboard/onboard.dart';
 import 'package:cs310group28/navigation_bar.dart';
 import 'package:cs310group28/routes/category_page.dart';
 import 'package:cs310group28/routes/login_signup.dart';
 import 'package:cs310group28/utils/colors.dart';
 import 'package:cs310group28/utils/styles.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 bool loginStatus = false;
 
+int? isviewed;
 Future main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  isviewed = prefs.getInt('onBoard');
   List list3 = List.empty(growable: true);
   WidgetsFlutterBinding.ensureInitialized();
   //runApp(new MyApp());
@@ -26,6 +37,8 @@ Future main() async {
   }));
 }
 
+
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -41,7 +54,7 @@ class _MyAppState extends State<MyApp> {
           //accentColor: Colors.cyan[600],
           fontFamily: 'Georgia',
         ),
-        home: MyHome());
+        home: isviewed != 0 ? OnBoard() : MyHome());
   }
 }
 
