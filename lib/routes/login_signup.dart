@@ -74,6 +74,7 @@ class LoginScreen extends StatelessWidget {
         return _authUser(loginData); //auth
       },
       //signup
+
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => MyApp(),

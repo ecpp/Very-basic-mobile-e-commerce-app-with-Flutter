@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'package:cs310group28/routes/cart_page.dart';
+
 import 'utils/colors.dart';
 import 'utils/styles.dart';
 import 'routes/login_signup.dart';
 import 'package:flutter/material.dart';
 import 'package:cs310group28/main.dart';
 import 'package:cs310group28/routes/category_page.dart';
+import 'package:cs310group28/routes/search_page.dart';
+import 'package:cs310group28/routes/profile_page.dart';
 
 class NavigationBar extends StatefulWidget {
   @override
@@ -44,7 +48,7 @@ class _NavBarState extends State<NavigationBar> {
                 title: Text('Profile', style: navText),
                 onTap: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Dresses()));
+                      .push(MaterialPageRoute(builder: (context) => ProfilePage()));
                 }),
           if (loginStatus == true)
             ListTile(
@@ -52,7 +56,7 @@ class _NavBarState extends State<NavigationBar> {
                 title: const Text('Orders & Returns', style: TextStyle(fontSize: 25)),
                 onTap: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Dresses()));
+                      .push(MaterialPageRoute(builder: (context) => ProfilePage()));
                 }),
 
           if (loginStatus == false) Divider(),
@@ -61,7 +65,7 @@ class _NavBarState extends State<NavigationBar> {
             title: Text('Search', style: navText),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
+                  .push(MaterialPageRoute(builder: (context) => SearchPage()));
             },
           ),
           if (loginStatus == false)
@@ -70,7 +74,7 @@ class _NavBarState extends State<NavigationBar> {
               title: Text('Cart', style: navText),
               onTap: () {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Dresses()));
+                    .push(MaterialPageRoute(builder: (context) => CartPage()));
               },
             ),
           Divider(),
@@ -78,7 +82,7 @@ class _NavBarState extends State<NavigationBar> {
             title: Text('Hats', style: navText),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
+                  .push(MaterialPageRoute(builder: (context) => Hats()));
             },
           ),
           ListTile(
@@ -92,21 +96,21 @@ class _NavBarState extends State<NavigationBar> {
             title: Text('Skirts', style: navText),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
+                  .push(MaterialPageRoute(builder: (context) => Skirts()));
             },
           ),
           ListTile(
             title: Text('Shirts', style: navText),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
+                  .push(MaterialPageRoute(builder: (context) => Shirts()));
             },
           ),
           ListTile(
             title: Text('Shoes', style: navText),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
+                  .push(MaterialPageRoute(builder: (context) => Shoes()));
             },
           ),
           Divider(),
@@ -114,7 +118,7 @@ class _NavBarState extends State<NavigationBar> {
             title: Text('Products', style: navText),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
+                  .push(MaterialPageRoute(builder: (context) => AllProducts()));
             },
           ),
         ],
