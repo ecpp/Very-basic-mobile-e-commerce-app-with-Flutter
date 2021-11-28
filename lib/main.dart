@@ -1,4 +1,5 @@
 import 'dart:async';
+//test123
 import 'package:flutter/material.dart';
 import 'package:cs310group28/navigation_bar.dart';
 import 'package:cs310group28/routes/category_page.dart';
@@ -16,7 +17,7 @@ Future main() async {
       MaterialApp(title: 'CS310 Group 28 Project', initialRoute: '/', routes: {
     '/': (context) => MyApp(),
     '/HomePage': (context) => MyHome(),
-    '/login': (context) => LoginScreen(),
+    '/Login': (context) => LoginScreen(),
     '/Hats': (context) => Hats(),
     '/Dresses': (context) => Dresses(),
     '/Skirts': (context) => Skirts(),
@@ -73,7 +74,7 @@ class _MyHomeState extends State<MyHome> {
                 ),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
-                  //Navigator.pushNamed(context, '/login');
+                  //Navigator.pushNamed(context, '/Login');
                 },
               ),
             if (loginStatus == true)
@@ -116,7 +117,7 @@ class _MyHomeState extends State<MyHome> {
               ),
               onPressed: () {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Dresses()));
+                    .push(MaterialPageRoute(builder: (context) => AllProducts()));
               }),
           //margin: EdgeInsets.only(top:15.0),
           margin: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
@@ -139,7 +140,7 @@ class _MyHomeState extends State<MyHome> {
         InkWell(
           onTap: () {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Dresses()));
+                .push(MaterialPageRoute(builder: (context) => Hats()));
           },
           child: Container(
             margin: EdgeInsets.all(10.0),
@@ -195,7 +196,7 @@ class _MyHomeState extends State<MyHome> {
         InkWell(
           onTap: () {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Dresses()));
+                .push(MaterialPageRoute(builder: (context) => Skirts()));
           },
           child: Container(
             margin: EdgeInsets.all(10.0),
@@ -223,7 +224,7 @@ class _MyHomeState extends State<MyHome> {
         InkWell(
           onTap: () {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Dresses()));
+                .push(MaterialPageRoute(builder: (context) => Shirts()));
           },
           child: Container(
             margin: EdgeInsets.all(10.0),
@@ -251,7 +252,7 @@ class _MyHomeState extends State<MyHome> {
         InkWell(
           onTap: () {
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Dresses()));
+                .push(MaterialPageRoute(builder: (context) => Shoes()));
           },
           child: Container(
             margin: EdgeInsets.all(10.0),

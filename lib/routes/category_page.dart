@@ -61,3 +61,14 @@ class _ShoesState extends State<Shoes> {
     return Scaffold(appBar: AppBar(title:Text('Shoes'),centerTitle: true,));
   }
 }
+
+class AllProducts extends StatefulWidget {
+  @override
+  _AllProductsState createState() => _AllProductsState();
+}
+
+class _AllProductsState extends State<AllProducts> {
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(title:Text('All Products'),centerTitle: true,));
+  }
+}

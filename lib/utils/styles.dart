@@ -8,7 +8,7 @@ final navText = GoogleFonts.montserrat(
 );
 
 final homeText = GoogleFonts.montserrat(
-  fontSize: 30.0,
+  fontSize: 25.0,
   color: AppColors.navColor,
 );
 
