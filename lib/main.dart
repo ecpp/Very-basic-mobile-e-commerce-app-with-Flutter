@@ -1,134 +1,28 @@
 import 'dart:async';
-import 'utils/colors.dart';
-import 'utils/styles.dart';
-import 'login_signup.dart';
-//test 123
 import 'package:flutter/material.dart';
+import 'package:cs310group28/navigation_bar.dart';
+import 'package:cs310group28/routes/category_page.dart';
+import 'package:cs310group28/routes/login_signup.dart';
+import 'package:cs310group28/utils/colors.dart';
+import 'package:cs310group28/utils/styles.dart';
 
 bool loginStatus = false;
-//saaassasaasda
-
-class NavigationBar extends StatefulWidget {
-  @override
-  _NavBarState createState() => _NavBarState();
-}
-
-class _NavBarState extends State<NavigationBar> {
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          ListTile(),
-          if (loginStatus == false)
-            ListTile(
-                leading: Icon(Icons.login),
-                title: Text('Sign In', style: navText),
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => LoginScreen()));
-                }),
-          if (loginStatus == true)
-            ListTile(
-                title: Text('Welcome ' + '!', style: TextStyle(fontSize: 25))),
-          if (loginStatus == true) Divider(),
-          ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home Page', style: navText),
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => MyApp()));
-              }),
-          if (loginStatus == true)
-            ListTile(
-                leading: Icon(Icons.account_box),
-                title: Text('Profile', style: navText),
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Dresses()));
-                }),
-          if (loginStatus == true)
-            ListTile(
-                leading: const Icon(Icons.local_shipping),
-                title: const Text('Orders & Returns', style: TextStyle(fontSize: 25)),
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Dresses()));
-                }),
-
-          if (loginStatus == false) Divider(),
-          ListTile(
-            leading: Icon(Icons.search),
-            title: Text('Search', style: navText),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
-            },
-          ),
-          if (loginStatus == false)
-            ListTile(
-              leading: Icon(Icons.shopping_cart_rounded),
-              title: Text('Cart', style: navText),
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Dresses()));
-              },
-            ),
-          Divider(),
-          ListTile(
-            title: Text('Hats', style: navText),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
-            },
-          ),
-          ListTile(
-            title: Text('Dresses', style: navText),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
-            },
-          ),
-          ListTile(
-            title: Text('Skirts', style: navText),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
-            },
-          ),
-          ListTile(
-            title: Text('Shirts', style: navText),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
-            },
-          ),
-          ListTile(
-            title: Text('Shoes', style: navText),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
-            },
-          ),
-          Divider(),
-          ListTile(
-            title: Text('Products', style: navText),
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Dresses()));
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 Future main() async {
   List list3 = List.empty(growable: true);
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(new MyApp());
+  //runApp(new MyApp());
+  runApp(
+      MaterialApp(title: 'CS310 Group 28 Project', initialRoute: '/', routes: {
+    '/': (context) => MyApp(),
+    '/HomePage': (context) => MyHome(),
+    '/login': (context) => LoginScreen(),
+    '/Hats': (context) => Hats(),
+    '/Dresses': (context) => Dresses(),
+    '/Skirts': (context) => Skirts(),
+    '/Shirts': (context) => Shirts(),
+    '/Shoes': (context) => Shoes(),
+  }));
 }
 
 class MyApp extends StatefulWidget {
@@ -143,7 +37,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           brightness: Brightness.dark,
           primaryColor: Colors.orange,
-          accentColor: Colors.cyan[600],
+          //accentColor: Colors.cyan[600],
           fontFamily: 'Georgia',
         ),
         home: MyHome());
@@ -168,8 +62,7 @@ class _MyHomeState extends State<MyHome> {
             if (loginStatus == false)
               Container(
                   child: Text("Sign in",
-                      textAlign: TextAlign.center,
-                      style: navText),
+                      textAlign: TextAlign.center, style: navText),
                   decoration: BoxDecoration(),
                   margin: EdgeInsets.only(left: 10.0, top: 17.0)),
             if (loginStatus == false)
@@ -179,8 +72,8 @@ class _MyHomeState extends State<MyHome> {
                   color: AppColors.navColor,
                 ),
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                  //Navigator.pushNamed(context, '/login');
                 },
               ),
             if (loginStatus == true)
@@ -214,8 +107,7 @@ class _MyHomeState extends State<MyHome> {
         Container(
           child: ElevatedButton(
               child: Text('Products',
-                  textAlign: TextAlign.center,
-                  style: navTextBlack),
+                  textAlign: TextAlign.center, style: navTextBlack),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
@@ -232,9 +124,8 @@ class _MyHomeState extends State<MyHome> {
           height: 70.0,
         ),
         Container(
-            child: Text('Hats',
-                textAlign: TextAlign.center,
-                style: navTextBlack),
+            child:
+                Text('Hats', textAlign: TextAlign.center, style: navTextBlack),
             //color: Colors.lightBlue,
             decoration: BoxDecoration(
                 //shape: BoxShape.rectangle,
@@ -262,8 +153,7 @@ class _MyHomeState extends State<MyHome> {
         ),
         Container(
             child: Text('Dresses',
-                textAlign: TextAlign.center,
-                style: navTextBlack),
+                textAlign: TextAlign.center, style: navTextBlack),
             //color: Colors.lightBlue,
             decoration: BoxDecoration(
                 //shape: BoxShape.rectangle,
@@ -291,8 +181,7 @@ class _MyHomeState extends State<MyHome> {
         ),
         Container(
             child: Text('Skirts',
-                textAlign: TextAlign.center,
-                style: navTextBlack),
+                textAlign: TextAlign.center, style: navTextBlack),
             //color: Colors.lightBlue,
             decoration: BoxDecoration(
                 //shape: BoxShape.rectangle,
@@ -320,8 +209,7 @@ class _MyHomeState extends State<MyHome> {
         ),
         Container(
             child: Text('Shirts',
-                textAlign: TextAlign.center,
-                style: navTextBlack),
+                textAlign: TextAlign.center, style: navTextBlack),
             //color: Colors.lightBlue,
             decoration: BoxDecoration(
                 //shape: BoxShape.rectangle,
@@ -348,9 +236,8 @@ class _MyHomeState extends State<MyHome> {
           ),
         ),
         Container(
-            child: Text('Shoes',
-                textAlign: TextAlign.center,
-                style: navTextBlack),
+            child:
+                Text('Shoes', textAlign: TextAlign.center, style: navTextBlack),
             //color: Colors.lightBlue,
             decoration: BoxDecoration(
                 //shape: BoxShape.rectangle,
@@ -379,42 +266,5 @@ class _MyHomeState extends State<MyHome> {
       ]),
       //resizeToAvoidBottomInset: false
     );
-  }
-}
-
-const users = const {
-  'asd@gmail.com': '12345',
-  'qwe@hotmail.com': 'hunter',
-  'anilercan@sabanciuniv.edu': '123'
-};
-
-String signInName = "";
-
-//late Future<String> a;
-
-class Dresses extends StatefulWidget {
-  @override
-  _DressesState createState() => _DressesState();
-}
-
-class _DressesState extends State<Dresses> {
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
-
-class LogIn extends StatefulWidget {
-  @override
-  _LogInState createState() => _LogInState();
-}
-
-class _LogInState extends State<LogIn> {
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-            margin: EdgeInsets.only(top: 30.0),
-            padding: EdgeInsets.all(40.0),
-            decoration: BoxDecoration(color: Colors.pinkAccent),
-            child: TextFormField()));
   }
 }
