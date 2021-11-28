@@ -1,7 +1,6 @@
 import 'dart:async';
+//test123
 import 'package:flutter/material.dart';
-
-import 'package:cs310group28/onboard/onboard.dart';
 import 'package:cs310group28/navigation_bar.dart';
 import 'package:cs310group28/routes/category_page.dart';
 import 'package:cs310group28/routes/login_signup.dart';
@@ -9,18 +8,14 @@ import 'package:cs310group28/utils/colors.dart';
 import 'package:cs310group28/utils/styles.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splashscreen/splashscreen.dart';
 
+import 'onboard/onboard.dart';
 
 bool loginStatus = false;
-
 int? isviewed;
+
 Future main() async {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
-  WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  isviewed = prefs.getInt('onBoard');
   List list3 = List.empty(growable: true);
   WidgetsFlutterBinding.ensureInitialized();
   //runApp(new MyApp());
@@ -37,14 +32,45 @@ Future main() async {
   }));
 }
 
-
-
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return /*MaterialApp(
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Colors.orange,
+          //accentColor: Colors.cyan[600],
+          fontFamily: 'Georgia',
+        ),
+        home: ScreenSplash());*/
+
+      SplashScreen(
+          seconds: 10,
+          navigateAfterSeconds:  MyMain(),
+          title:  Text('Welcome to E-Gayme E-Commercial App',
+            style:  TextStyle(
+                color:Colors.red,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0
+            ),),
+          //image: Image.asset('assets/CategoryHat.jpg', fit: BoxFit.cover),
+          image: Image.network('https://www.freepngimg.com/thumb/shopping/73432-flame-shopping-cart-icon-free-hq-image.png'),
+
+          backgroundColor: Colors.white,
+          styleTextUnderTheLoader:  TextStyle(),
+          photoSize: 100.0,
+          loaderColor: Colors.red
+      );
+
+    ;}
+}
+
+class MyMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,7 +81,8 @@ class _MyAppState extends State<MyApp> {
           fontFamily: 'Georgia',
         ),
         home: isviewed != 0 ? OnBoard() : MyHome());
-  }
+
+    ;}
 }
 
 class MyHome extends StatefulWidget {
