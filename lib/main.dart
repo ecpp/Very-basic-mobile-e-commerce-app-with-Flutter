@@ -1,5 +1,4 @@
 import 'dart:async';
-//test123
 import 'package:flutter/material.dart';
 import 'package:cs310group28/navigation_bar.dart';
 import 'package:cs310group28/routes/category_page.dart';
@@ -8,7 +7,6 @@ import 'package:cs310group28/utils/colors.dart';
 import 'package:cs310group28/utils/styles.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:splashscreen/splashscreen.dart';
 
 import 'onboard/onboard.dart';
 
@@ -40,39 +38,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return /*MaterialApp(
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Colors.orange,
-          //accentColor: Colors.cyan[600],
-          fontFamily: 'Georgia',
-        ),
-        home: ScreenSplash());*/
-
-      SplashScreen(
-          seconds: 10,
-          navigateAfterSeconds:  MyMain(),
-          title:  Text('Welcome to E-Gayme E-Commercial App',
-            style:  TextStyle(
-                color:Colors.red,
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0
-            ),),
-          //image: Image.asset('assets/CategoryHat.jpg', fit: BoxFit.cover),
-          image: Image.network('https://www.freepngimg.com/thumb/shopping/73432-flame-shopping-cart-icon-free-hq-image.png'),
-
-          backgroundColor: Colors.white,
-          styleTextUnderTheLoader:  TextStyle(),
-          photoSize: 100.0,
-          loaderColor: Colors.red
-      );
-
-    ;}
-}
-
-class MyMain extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
           brightness: Brightness.dark,
@@ -82,7 +47,7 @@ class MyMain extends StatelessWidget {
         ),
         home: isviewed != 0 ? OnBoard() : MyHome());
 
-    ;}
+    }
 }
 
 class MyHome extends StatefulWidget {
