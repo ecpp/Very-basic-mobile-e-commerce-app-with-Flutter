@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:cs310group28/routes/cart_page.dart';
-
 import 'utils/colors.dart';
 import 'utils/styles.dart';
 import 'routes/login_signup.dart';
