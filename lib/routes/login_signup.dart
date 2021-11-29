@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'dart:convert';
+
 import '../main.dart';
 
-String signInName="";
+String signInName = "";
 
 const users = const {
   'asd@gmail.com': '12345',
@@ -16,7 +16,11 @@ class LoginScreen extends StatelessWidget {
 
   //auth
   Future<String?> _authUser(LoginData data) async {
-    loginStatus=true;
+    loginStatus = true;
+    return null;
+  }
+
+  Future<String?> _signupUser() async {
     return null;
   }
 
@@ -49,14 +53,15 @@ class LoginScreen extends StatelessWidget {
        */
       //onRecoverPassword: _recoverPassword,
       userValidator: (value) {
-        bool endingDot=false;
+        bool endingDot = false;
         if (value!.endsWith('.com')) {
           endingDot = true;
         }
         if (value.endsWith('.edu')) {
           endingDot = true;
         }
-        if (!value.contains('@') ||  endingDot==false){ //!value.endsWith('.com')
+        if (!value.contains('@') || endingDot == false) {
+          //!value.endsWith('.com')
           return "Email must contain '@' and end with '.com' or '.edu'";
         }
         return null;
@@ -70,11 +75,17 @@ class LoginScreen extends StatelessWidget {
       onLogin: (loginData) {
         print('Login info');
         print('Name: ${loginData.name}');
-        signInName=loginData.name;
+        signInName = loginData.name;
         print('Password: ${loginData.password}');
         return _authUser(loginData); //auth
       },
       //signup
+      onSignup: (loginData) {
+        print('Signup info');
+        print('Name: ${loginData.name}');
+        print('Password: ${loginData.password}');
+        return _signupUser();
+      },
 
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(

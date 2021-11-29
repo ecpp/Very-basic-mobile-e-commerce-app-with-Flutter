@@ -1,14 +1,15 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
+
 import 'package:cs310group28/navigation_bar.dart';
+import 'package:cs310group28/routes/cart_page.dart';
 import 'package:cs310group28/routes/category_page.dart';
 import 'package:cs310group28/routes/login_signup.dart';
 import 'package:cs310group28/utils/colors.dart';
-import 'package:cs310group28/utils/styles.dart';
-import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cs310group28/utils/dimension.dart';
-import 'package:cs310group28/routes/cart_page.dart';
+import 'package:cs310group28/utils/styles.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'onboard/onboard.dart';
 
 bool loginStatus = false;
@@ -47,8 +48,7 @@ class _MyAppState extends State<MyApp> {
           fontFamily: 'Georgia',
         ),
         home: isViewed != 0 ? OnBoard() : MyHome());
-
-    }
+  }
 }
 
 class MyHome extends StatefulWidget {
@@ -66,6 +66,7 @@ class _MyHomeState extends State<MyHome> {
           centerTitle: true,
           title: Text('Home', style: homeText),
           actions: <Widget>[
+            /*
             if (loginStatus == false)
               Container(
                   child: Text("Sign in",
@@ -83,13 +84,39 @@ class _MyHomeState extends State<MyHome> {
                   //Navigator.pushNamed(context, '/Login');
                 },
               ),
+              */
+            if (loginStatus == false)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
+                child: Text("Login",
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
+              ),
+
+            if (loginStatus == false)
+              IconButton(
+                icon: Icon(
+                  Icons.login,
+                  color: AppColors.navColor,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                  //Navigator.pushNamed(context, '/Login');
+                },
+              ),
             if (loginStatus == true)
-              Container(
-                  child: Text("Sign out",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18)),
-                  decoration: BoxDecoration(),
-                  margin: Dimen.homepageDefaultPadding),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    loginStatus = false;
+                  });
+                },
+                child: Text("Login",
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
+              ),
             if (loginStatus == true)
               IconButton(
                   icon: Icon(
@@ -122,8 +149,8 @@ class _MyHomeState extends State<MyHome> {
                 onPrimary: Colors.white, // foreground
               ),
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => AllProducts()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AllProducts()));
               }),
           //margin: EdgeInsets.only(top:15.0),
           margin: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
@@ -153,7 +180,9 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network('http://91.191.173.36/assets/CategoryHat.jpg', fit: BoxFit.cover),
+              child: Image.network(
+                  'http://91.191.173.36/assets/CategoryHat.jpg',
+                  fit: BoxFit.cover),
             ),
           ),
         ),
@@ -180,7 +209,9 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network('http://91.191.173.36/assets/CategoryDress.jpg', fit: BoxFit.cover),
+              child: Image.network(
+                  'http://91.191.173.36/assets/CategoryDress.jpg',
+                  fit: BoxFit.cover),
             ),
           ),
         ),
@@ -207,7 +238,9 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network('http://91.191.173.36/assets/CategorySkirt.jpg', fit: BoxFit.fill),
+              child: Image.network(
+                  'http://91.191.173.36/assets/CategorySkirt.jpg',
+                  fit: BoxFit.fill),
             ),
           ),
         ),
@@ -234,7 +267,9 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network('http://91.191.173.36/assets/CategoryShirt.jpg', fit: BoxFit.fill),
+              child: Image.network(
+                  'http://91.191.173.36/assets/CategoryShirt.jpg',
+                  fit: BoxFit.fill),
             ),
           ),
         ),
@@ -261,7 +296,9 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network('http://91.191.173.36/assets/CategoryShoe.jpg', fit: BoxFit.cover),
+              child: Image.network(
+                  'http://91.191.173.36/assets/CategoryShoe.jpg',
+                  fit: BoxFit.cover),
             ),
           ),
         ),
