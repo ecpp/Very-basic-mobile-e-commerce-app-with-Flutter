@@ -13,11 +13,13 @@ import 'onboard/onboard.dart';
 
 bool loginStatus = false;
 int? isViewed;
-
+int launchCount = 0;
 Future main() async {
   List list3 = List.empty(growable: true);
   WidgetsFlutterBinding.ensureInitialized();
   //runApp(new MyApp());
+
+  setValue();
   runApp(
       MaterialApp(title: 'CS310 Group 28 Project', initialRoute: '/', routes: {
     '/': (context) => MyApp(),
@@ -30,6 +32,18 @@ Future main() async {
     '/Shoes': (context) => Shoes(),
   }));
 }
+
+void setValue() async {
+  final prefs = await SharedPreferences.getInstance();
+  launchCount = prefs.getInt('counter') ?? 0;
+  prefs.setInt('counter', launchCount + 1);
+  if (launchCount == 0) {
+    print("first launch"); //setState to refresh or move to some other page
+  } else {
+    print("Not first launch");
+  }
+}
+
 
 class MyApp extends StatefulWidget {
   @override
@@ -46,7 +60,8 @@ class _MyAppState extends State<MyApp> {
           //accentColor: Colors.cyan[600],
           fontFamily: 'Georgia',
         ),
-        home: isViewed != 0 ? OnBoard() : MyHome());
+
+        home: launchCount != 0 ? MyHome() : OnBoard());
 
     }
 }
