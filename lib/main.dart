@@ -10,7 +10,7 @@ import 'package:cs310group28/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:cs310group28/routes/welcome_page.dart';
 import 'onboard/onboard.dart';
 
 bool loginStatus = false;
@@ -55,13 +55,15 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
         theme: ThemeData(
           brightness: Brightness.dark,
           primaryColor: Colors.orange,
           //accentColor: Colors.cyan[600],
           fontFamily: 'Georgia',
         ),
-        home: launchCount != 0 ? MyHome() : OnBoard());
+        home: launchCount != 0 ? WelcomePage() : OnBoard());
+
   }
 }
 

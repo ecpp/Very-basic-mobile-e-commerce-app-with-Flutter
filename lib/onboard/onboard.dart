@@ -3,6 +3,7 @@ import 'package:cs310group28/onboard/onboard_model.dart';
 import 'package:cs310group28/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cs310group28/routes/welcome_page.dart';
 
 
 class OnBoard extends StatefulWidget {
@@ -65,16 +66,21 @@ class _OnBoardState extends State<OnBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.navColor,
+      backgroundColor: AppColors.walkBG,
       appBar: AppBar(
-        backgroundColor: AppColors.navColor,
+        backgroundColor: AppColors.walkBG,
         elevation: 0.0,
         actions: [
           TextButton(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.all(16.0),
+              primary: Colors.white,
+              textStyle: const TextStyle(fontSize: 20),
+            ),
             onPressed: () {
               _storeOnboardInfo();
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => MyHome()));
+                  context, MaterialPageRoute(builder: (context) => WelcomePage()));
             },
             child: Text(
               "Skip",
@@ -136,7 +142,7 @@ class _OnBoardState extends State<OnBoard> {
                       fontSize: 27.0,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Poppins',
-                      color: AppColors.textColor,
+                      color: AppColors.maintextColor,
                     ),
                   ),
                   Text(
@@ -145,7 +151,7 @@ class _OnBoardState extends State<OnBoard> {
                     style: TextStyle(
                       fontSize: 14.0,
                       fontFamily: 'Montserrat',
-                      color: AppColors.textColor,
+                      color: AppColors.maintextColor,
                     ),
                   ),
                   Row(
@@ -180,7 +186,7 @@ class _OnBoardState extends State<OnBoard> {
                           if (index == screens.length - 1) {
                             await _storeOnboardInfo();
                             Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (context) => MyHome()));
+                                MaterialPageRoute(builder: (context) => WelcomePage()));
                           }
 
                           _pageController.nextPage(
