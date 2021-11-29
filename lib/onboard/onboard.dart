@@ -3,6 +3,7 @@ import 'package:cs310group28/onboard/onboard_model.dart';
 import 'package:cs310group28/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cs310group28/routes/welcome_page.dart';
 
 
 class OnBoard extends StatefulWidget {
@@ -74,7 +75,7 @@ class _OnBoardState extends State<OnBoard> {
             onPressed: () {
               _storeOnboardInfo();
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => MyHome()));
+                  context, MaterialPageRoute(builder: (context) => WelcomePage()));
             },
             child: Text(
               "Skip",
@@ -180,7 +181,7 @@ class _OnBoardState extends State<OnBoard> {
                           if (index == screens.length - 1) {
                             await _storeOnboardInfo();
                             Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (context) => MyHome()));
+                                MaterialPageRoute(builder: (context) => WelcomePage()));
                           }
 
                           _pageController.nextPage(
