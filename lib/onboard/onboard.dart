@@ -15,7 +15,8 @@ class _OnBoardState extends State<OnBoard> {
   late PageController _pageController;
   List<OnboardModel> screens = <OnboardModel>[
     OnboardModel(
-      img: 'assets/shopping_cart.png',
+
+      img: 'https://cdn0.iconfinder.com/data/icons/shopping-and-commerce-outline/512/Shopping_and_Commerce_-_Outline_21-512.png',
       text: "SHOPPING ONLINE!",
       desc:
       "You can buy everything on E-GAYME 7/24 and online!",
@@ -23,7 +24,7 @@ class _OnBoardState extends State<OnBoard> {
       button: AppColors.maintitleBackColor,
     ),
     OnboardModel(
-      img: 'assets/packet.png',
+      img: 'http://cdn.onlinewebfonts.com/svg/img_405532.png',
       text: "CLICK AND BUY!",
       desc:
       "Just click and add to cart, then buy! ",
@@ -31,7 +32,8 @@ class _OnBoardState extends State<OnBoard> {
       button: AppColors.maintitleBackColor,
     ),
     OnboardModel(
-      img: 'assets/enjoy.png',
+
+      img: 'https://i.pinimg.com/originals/14/64/53/146453abcd0d77e10444895668151bd0.png',
       text: "ENJOY!",
       desc:
       "We serve you just because you are what you are :)",
@@ -101,7 +103,7 @@ class _OnBoardState extends State<OnBoard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(screens[index].img,height:300, width: 225, fit: BoxFit.fitWidth,),
+                  Image.network(screens[index].img,height: 300, width: 225,),
                   Container(
                     height: 10.0,
                     child: ListView.builder(
