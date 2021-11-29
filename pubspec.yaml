@@ -60,12 +60,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  assets:
-    - assets/CategoryDress.jpg
-    - assets/CategoryHat.jpg
-    - assets/CategoryShirt.jpg
-    - assets/CategoryShoe.jpg
-    - assets/CategorySkirt.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

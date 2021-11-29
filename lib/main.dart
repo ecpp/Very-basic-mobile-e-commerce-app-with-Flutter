@@ -8,11 +8,11 @@ import 'package:cs310group28/utils/styles.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cs310group28/utils/dimension.dart';
-
+import 'package:cs310group28/routes/cart_page.dart';
 import 'onboard/onboard.dart';
 
 bool loginStatus = false;
-int? isviewed;
+int? isViewed;
 
 Future main() async {
   List list3 = List.empty(growable: true);
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
           //accentColor: Colors.cyan[600],
           fontFamily: 'Georgia',
         ),
-        home: isviewed != 0 ? OnBoard() : MyHome());
+        home: isViewed != 0 ? OnBoard() : MyHome());
 
     }
 }
@@ -107,7 +107,7 @@ class _MyHomeState extends State<MyHome> {
         backgroundColor: Colors.green,
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => Dresses()));
+              .push(MaterialPageRoute(builder: (context) => CartPage()));
         },
       ),
       body: ListView(children: [
@@ -153,7 +153,7 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('assets/CategoryHat.jpg', fit: BoxFit.cover),
+              child: Image.network('http://91.191.173.36/assets/CategoryHat.jpg', fit: BoxFit.cover),
             ),
           ),
         ),
@@ -180,7 +180,7 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('assets/CategoryDress.jpg', fit: BoxFit.cover),
+              child: Image.network('http://91.191.173.36/assets/CategoryDress.jpg', fit: BoxFit.cover),
             ),
           ),
         ),
@@ -207,7 +207,7 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('assets/CategorySkirt.jpg', fit: BoxFit.fill),
+              child: Image.network('http://91.191.173.36/assets/CategorySkirt.jpg', fit: BoxFit.fill),
             ),
           ),
         ),
@@ -234,7 +234,7 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('assets/CategoryShirt.jpg', fit: BoxFit.fill),
+              child: Image.network('http://91.191.173.36/assets/CategoryShirt.jpg', fit: BoxFit.fill),
             ),
           ),
         ),
@@ -261,7 +261,7 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('assets/CategoryShoe.jpg', fit: BoxFit.cover),
+              child: Image.network('http://91.191.173.36/assets/CategoryShoe.jpg', fit: BoxFit.cover),
             ),
           ),
         ),
