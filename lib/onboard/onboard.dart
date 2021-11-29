@@ -1,8 +1,9 @@
 import 'package:cs310group28/main.dart';
 import 'package:cs310group28/onboard/onboard_model.dart';
+import 'package:cs310group28/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'constant.dart';
+
 
 class OnBoard extends StatefulWidget {
   @override
@@ -14,28 +15,28 @@ class _OnBoardState extends State<OnBoard> {
   late PageController _pageController;
   List<OnboardModel> screens = <OnboardModel>[
     OnboardModel(
-      img: 'assets/images/img-1.png',
-      text: "Belajar Dengan Metode Learning by Doing",
+      img: 'assets/shopping_cart.png',
+      text: "SHOPPING ONLINE!",
       desc:
-      "Sebuah metode belajar yang terbuktiampuh dalam meningkatkan produktifitas belajar, Learning by Doing",
-      bg: Colors.white,
-      button: Color(0xFF4756DF),
+      "You can buy everything on E-GAYME 7/24 and online!",
+      bg: AppColors.maintextColor,
+      button: AppColors.maintitleBackColor,
     ),
     OnboardModel(
-      img: 'assets/images/img-2.png',
-      text: "Dapatkan Kemudahan Akses Kapanpun dan Dimanapun",
+      img: 'assets/packet.png',
+      text: "CLICK AND BUY!",
       desc:
-      "Tidak peduli dimanapun kamu, semua kursus yang telah kamu ikuti bias kamu akses sepenuhnya",
-      bg: Color(0xFF4756DF),
-      button: Colors.white,
+      "Just click and add to cart, then buy! ",
+      bg: AppColors.maintextColor,
+      button: AppColors.maintitleBackColor,
     ),
     OnboardModel(
-      img: 'assets/images/img-3.png',
-      text: "Gunakan Fitur Kolaborasi Untuk Pengalaman Lebih",
+      img: 'assets/enjoy.png',
+      text: "ENJOY!",
       desc:
-      "Tersedia fitur Kolaborasi dengan tujuan untuk mengasah skill lebih dalam karena bias belajar bersama",
-      bg: Colors.white,
-      button: Color(0xFF4756DF),
+      "We serve you just because you are what you are :)",
+      bg: AppColors.maintextColor,
+      button: AppColors.maintitleBackColor,
     ),
   ];
 
@@ -62,9 +63,9 @@ class _OnBoardState extends State<OnBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
+      backgroundColor: AppColors.navColor,
       appBar: AppBar(
-        backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
+        backgroundColor: AppColors.navColor,
         elevation: 0.0,
         actions: [
           TextButton(
@@ -76,7 +77,8 @@ class _OnBoardState extends State<OnBoard> {
             child: Text(
               "Skip",
               style: TextStyle(
-                color: currentIndex % 2 == 0 ? kblack : kwhite,
+                color: AppColors.maintextColor,
+
               ),
             ),
           )
@@ -87,7 +89,7 @@ class _OnBoardState extends State<OnBoard> {
         child: PageView.builder(
             itemCount: screens.length,
             controller: _pageController,
-            physics: NeverScrollableScrollPhysics(),
+
             onPageChanged: (int index) {
               setState(() {
                 currentIndex = index;
@@ -99,7 +101,7 @@ class _OnBoardState extends State<OnBoard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(screens[index].img),
+                  Image.asset(screens[index].img,height:300, width: 225, fit: BoxFit.fitWidth,),
                   Container(
                     height: 10.0,
                     child: ListView.builder(
@@ -116,8 +118,8 @@ class _OnBoardState extends State<OnBoard> {
                                 height: 8,
                                 decoration: BoxDecoration(
                                   color: currentIndex == index
-                                      ? kbrown
-                                      : kbrown300,
+                                      ? AppColors.maintitleBackColor
+                                      : AppColors.walkColor,
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
@@ -132,7 +134,7 @@ class _OnBoardState extends State<OnBoard> {
                       fontSize: 27.0,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Poppins',
-                      color: index % 2 == 0 ? kblack : kwhite,
+                      color: AppColors.textColor,
                     ),
                   ),
                   Text(
@@ -141,45 +143,62 @@ class _OnBoardState extends State<OnBoard> {
                     style: TextStyle(
                       fontSize: 14.0,
                       fontFamily: 'Montserrat',
-                      color: index % 2 == 0 ? kblack : kwhite,
+                      color: AppColors.textColor,
                     ),
                   ),
-                  InkWell(
-                    onTap: () async {
-                      print(index);
-                      if (index == screens.length - 1) {
-                        await _storeOnboardInfo();
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => MyHome()));
-                      }
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly, //Center Row contents horizontally,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          //print(index);
+                          if (index != 0) {
+                            _pageController.previousPage(
+                              duration: Duration(milliseconds: 600),
+                              curve: Curves.ease,
+                            );
+                          }
 
-                      _pageController.nextPage(
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.bounceIn,
-                      );
-                    },
-                    child: Container(
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
-                      decoration: BoxDecoration(
-                          color: index % 2 == 0 ? kblue : kwhite,
-                          borderRadius: BorderRadius.circular(15.0)),
-                      child: Row(mainAxisSize: MainAxisSize.min, children: [
-                        Text(
-                          "Next",
-                          style: TextStyle(
-                              fontSize: 16.0,
-                              color: index % 2 == 0 ? kwhite : kblue),
+
+                        },
+                        child: Container(
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 45.0, vertical: 6),
+                          decoration: BoxDecoration(
+                              color: AppColors.maintitleBackColor,
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: Row(mainAxisSize: MainAxisSize.min, children: [
+                            Icon(Icons.arrow_back_rounded, size: 18,),
+                          ]),
                         ),
-                        SizedBox(
-                          width: 15.0,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          //print(index);
+                          if (index == screens.length - 1) {
+                            await _storeOnboardInfo();
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) => MyHome()));
+                          }
+
+                          _pageController.nextPage(
+                            duration: Duration(milliseconds: 600),
+                            curve: Curves.ease,
+                          );
+
+                        },
+                        child: Container(
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 45.0, vertical: 6),
+                          decoration: BoxDecoration(
+                              color: AppColors.maintitleBackColor,
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: Row(mainAxisSize: MainAxisSize.min, children: [
+                            Icon(Icons.arrow_forward_rounded, size: 18,),
+                          ]),
                         ),
-                        Icon(
-                          Icons.arrow_forward_sharp,
-                          color: index % 2 == 0 ? kwhite : kblue,
-                        )
-                      ]),
-                    ),
+                      )
+                    ],
                   )
                 ],
               );
