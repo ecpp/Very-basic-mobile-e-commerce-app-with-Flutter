@@ -40,7 +40,7 @@ class _NavBarState extends State<NavigationBar> {
               title: Text('Home Page', style: navText),
               onTap: () {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => MyApp()));
+                    .push(MaterialPageRoute(builder: (context) => MyHome()));
               }),
           if (loginStatus == true)
             ListTile(

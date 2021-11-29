@@ -7,6 +7,7 @@ import 'package:cs310group28/utils/colors.dart';
 import 'package:cs310group28/utils/styles.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cs310group28/utils/dimension.dart';
 
 import 'onboard/onboard.dart';
 
@@ -70,7 +71,7 @@ class _MyHomeState extends State<MyHome> {
                   child: Text("Sign in",
                       textAlign: TextAlign.center, style: navText),
                   decoration: BoxDecoration(),
-                  margin: EdgeInsets.only(left: 10.0, top: 17.0)),
+                  margin: Dimen.homepageDefaultPadding),
             if (loginStatus == false)
               IconButton(
                 icon: Icon(
@@ -88,7 +89,7 @@ class _MyHomeState extends State<MyHome> {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18)),
                   decoration: BoxDecoration(),
-                  margin: EdgeInsets.only(left: 10.0, top: 17.0)),
+                  margin: Dimen.homepageDefaultPadding),
             if (loginStatus == true)
               IconButton(
                   icon: Icon(
@@ -138,17 +139,16 @@ class _MyHomeState extends State<MyHome> {
                 color: AppColors.titleBackColor,
                 border: Border.all(width: 4, color: AppColors.borderColor),
                 borderRadius: BorderRadius.circular(20)),
-            margin: EdgeInsets.only(
-                top: 30.0, bottom: 5.0, left: 15.0, right: 15.0),
+            margin: Dimen.mainDefaultMargin,
             //padding: EdgeInsets.all(20.0),
-            padding: EdgeInsets.only(top: 10.0, bottom: 10.0)),
+            padding: Dimen.mainDefaultPadding),
         InkWell(
           onTap: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => Hats()));
           },
           child: Container(
-            margin: EdgeInsets.all(10.0),
+            margin: Dimen.regularPadding,
             width: 300,
             height: 400,
             child: ClipRRect(
@@ -166,17 +166,16 @@ class _MyHomeState extends State<MyHome> {
                 color: AppColors.titleBackColor,
                 border: Border.all(width: 4, color: AppColors.borderColor),
                 borderRadius: BorderRadius.circular(20)),
-            margin: EdgeInsets.only(
-                top: 50.0, bottom: 5.0, left: 15.0, right: 15.0),
+            margin: Dimen.mainDefaultMargin,
             //padding: EdgeInsets.all(20.0),
-            padding: EdgeInsets.only(top: 10.0, bottom: 10.0)),
+            padding: Dimen.mainDefaultPadding),
         InkWell(
           onTap: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => Dresses()));
           },
           child: Container(
-            margin: EdgeInsets.all(10.0),
+            margin: Dimen.regularPadding,
             width: 300,
             height: 400,
             child: ClipRRect(
@@ -194,17 +193,16 @@ class _MyHomeState extends State<MyHome> {
                 color: AppColors.titleBackColor,
                 border: Border.all(width: 4, color: AppColors.borderColor),
                 borderRadius: BorderRadius.circular(20)),
-            margin: EdgeInsets.only(
-                top: 50.0, bottom: 5.0, left: 15.0, right: 15.0),
+            margin: Dimen.mainDefaultMargin,
             //padding: EdgeInsets.all(20.0),
-            padding: EdgeInsets.only(top: 10.0, bottom: 10.0)),
+            padding: Dimen.mainDefaultPadding),
         InkWell(
           onTap: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => Skirts()));
           },
           child: Container(
-            margin: EdgeInsets.all(10.0),
+            margin: Dimen.regularPadding,
             width: 300,
             height: 400,
             child: ClipRRect(
@@ -222,17 +220,16 @@ class _MyHomeState extends State<MyHome> {
                 color: AppColors.titleBackColor,
                 border: Border.all(width: 4, color: AppColors.borderColor),
                 borderRadius: BorderRadius.circular(20)),
-            margin: EdgeInsets.only(
-                top: 50.0, bottom: 5.0, left: 15.0, right: 15.0),
+            margin: Dimen.mainDefaultMargin,
             //padding: EdgeInsets.all(20.0),
-            padding: EdgeInsets.only(top: 10.0, bottom: 10.0)),
+            padding: Dimen.mainDefaultPadding),
         InkWell(
           onTap: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => Shirts()));
           },
           child: Container(
-            margin: EdgeInsets.all(10.0),
+            margin: Dimen.regularPadding,
             width: 300,
             height: 400,
             child: ClipRRect(
@@ -250,17 +247,16 @@ class _MyHomeState extends State<MyHome> {
                 color: AppColors.titleBackColor,
                 border: Border.all(width: 4, color: AppColors.borderColor),
                 borderRadius: BorderRadius.circular(20)),
-            margin: EdgeInsets.only(
-                top: 50.0, bottom: 5.0, left: 15.0, right: 15.0),
+            margin: Dimen.mainDefaultMargin,
             //padding: EdgeInsets.all(20.0),
-            padding: EdgeInsets.only(top: 10.0, bottom: 10.0)),
+            padding: Dimen.mainDefaultPadding),
         InkWell(
           onTap: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => Shoes()));
           },
           child: Container(
-            margin: EdgeInsets.all(10.0),
+            margin: Dimen.regularPadding,
             width: 300,
             height: 400,
             child: ClipRRect(

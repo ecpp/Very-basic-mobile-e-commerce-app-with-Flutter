@@ -1,6 +1,6 @@
 import 'package:cs310group28/main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cs310group28/utils/dimension.dart';
 import 'package:cs310group28/navigation_bar.dart';
 
 
@@ -63,11 +63,12 @@ class _SearchPageState extends State<SearchPage2> {
             searchValue=value;
             return null;
           },
-        ),margin: EdgeInsets.all(10.0)),
+        ),margin: Dimen.regularPadding),
 
           Container
             (child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            padding: Dimen.verticalparentPadding,
+            //padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
                 // Validate will return true if the form is valid, or false if

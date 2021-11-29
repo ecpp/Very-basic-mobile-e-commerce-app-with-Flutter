@@ -2,7 +2,6 @@ import 'package:cs310group28/main.dart';
 import 'package:cs310group28/onboard/onboard_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'constant.dart';
 
 class OnBoard extends StatefulWidget {
