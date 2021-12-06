@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cs310group28/navigation_bar.dart';
 import 'package:cs310group28/routes/cart_page.dart';
 import 'package:cs310group28/routes/category_page.dart';
@@ -52,17 +52,40 @@ void setValue() async {
 }
 
 class _MyAppState extends State<MyApp> {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Colors.orange,
-          //accentColor: Colors.cyan[600],
-          fontFamily: 'Georgia',
-        ),
-        home: launchCount != 0 ? WelcomePage() : OnBoard());
+    return FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print("Firebase connecting error.");
+            return const MaterialApp(
+              home: Scaffold(
+                body: Center(
+                  child: Text('Connection error.'),
+                )
+              )
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.done){
+            print("Firebase connecting success!");
+            return MaterialApp(
+                theme: ThemeData(
+                  brightness: Brightness.dark,
+                  primaryColor: Colors.orange,
+                  //accentColor: Colors.cyan[600],
+                  fontFamily: 'Georgia',
+                ),
+                home: launchCount != 0 ? WelcomePage() : OnBoard());
+          }
+          return const MaterialApp(
+            home: Center(
+              child: Text('Connecting to firebase...'),
+            )
+          );
+      }
+    );
 
   }
 }
@@ -130,12 +153,12 @@ class _MyHomeState extends State<MyHome> {
                     loginStatus = false;
                   });
                 },
-                child: Text("Login",
+                child: const Text("Login",
                     style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
             if (loginStatus == true)
               IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: AppColors.navColor,
                   ),
