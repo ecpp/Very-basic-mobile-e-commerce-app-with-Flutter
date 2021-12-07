@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cs310group28/routes/welcome_page.dart';
 import 'onboard/onboard.dart';
+import 'services/analytics_service.dart';
 
 bool loginStatus = false;
 int? isViewed;
@@ -22,17 +23,20 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setValue();
   //runApp(new MyApp());
-  runApp(
-      MaterialApp(title: 'CS310 Group 28 Project', initialRoute: '/', routes: {
-    '/': (context) => MyApp(),
-    '/HomePage': (context) => MyHome(),
-    '/Login': (context) => LoginScreen(),
-    '/Hats': (context) => Hats(),
-    '/Dresses': (context) => Dresses(),
-    '/Skirts': (context) => Skirts(),
-    '/Shirts': (context) => Shirts(),
-    '/Shoes': (context) => Shoes(),
-  }));
+  runApp(MaterialApp(
+      title: 'CS310 Group 28 Project',
+      navigatorObservers: [AnalyticsService().getAnalyticObserver()],
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyApp(),
+        '/HomePage': (context) => MyHome(),
+        '/Login': (context) => LoginScreen(),
+        '/Hats': (context) => Hats(),
+        '/Dresses': (context) => Dresses(),
+        '/Skirts': (context) => Skirts(),
+        '/Shirts': (context) => Shirts(),
+        '/Shoes': (context) => Shoes(),
+      }));
 }
 
 class MyApp extends StatefulWidget {
@@ -61,14 +65,12 @@ class _MyAppState extends State<MyApp> {
           if (snapshot.hasError) {
             print("Firebase connecting error.");
             return const MaterialApp(
-              home: Scaffold(
-                body: Center(
-                  child: Text('Connection error.'),
-                )
-              )
-            );
+                home: Scaffold(
+                    body: Center(
+              child: Text('Connection error.'),
+            )));
           }
-          if (snapshot.connectionState == ConnectionState.done){
+          if (snapshot.connectionState == ConnectionState.done) {
             print("Firebase connecting success!");
             return MaterialApp(
                 theme: ThemeData(
@@ -80,13 +82,10 @@ class _MyAppState extends State<MyApp> {
                 home: launchCount != 0 ? WelcomePage() : OnBoard());
           }
           return const MaterialApp(
-            home: Center(
-              child: Text('Connecting to firebase...'),
-            )
-          );
-      }
-    );
-
+              home: Center(
+            child: Text('Connecting to firebase...'),
+          ));
+        });
   }
 }
 
@@ -133,7 +132,6 @@ class _MyHomeState extends State<MyHome> {
                 child: Text("Login",
                     style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
-
             if (loginStatus == false)
               IconButton(
                 icon: Icon(
