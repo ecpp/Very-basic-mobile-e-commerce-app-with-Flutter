@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(5.0),
           child: Form(
