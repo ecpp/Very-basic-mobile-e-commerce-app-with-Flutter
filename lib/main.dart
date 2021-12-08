@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cs310group28/routes/welcome_page.dart';
 import 'onboard/onboard.dart';
 import 'services/analytics_service.dart';
+import 'package:cs310group28/routes/profile.dart';
 
 bool loginStatus = false;
 int? isViewed;
@@ -147,14 +148,13 @@ class _MyHomeState extends State<MyHome> {
             if (loginStatus == true)
               TextButton(
                 onPressed: () {
-                  setState(() {
-                    loginStatus = false;
-                  });
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ProfileScreen()));
                 },
-                child: const Text("Login",
+                child: const Text("Profile",
                     style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
-            if (loginStatus == true)
+            /* if (loginStatus == true)
               IconButton(
                   icon: const Icon(
                     Icons.logout,
@@ -164,7 +164,7 @@ class _MyHomeState extends State<MyHome> {
                     setState(() {
                       loginStatus = false;
                     });
-                  }),
+                  }),*/
           ]),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.shopping_cart_outlined),

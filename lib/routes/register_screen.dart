@@ -1,21 +1,16 @@
-import 'package:cs310group28/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cs310group28/routes/profile.dart';
-import 'package:cs310group28/routes/register_screen.dart';
+import 'package:cs310group28/routes/login_signup.dart';
 
-User? user;
-String useremail = "aa";
-
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool _value = false;
   String email = '';
   String password = '';
@@ -23,23 +18,28 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  String error = "";
-  Future<User?> loginEmailPassword(
+  String error = "404";
+
+  Future<User?> registerEmailPassword(
       {required String email,
       required String password,
       required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
     try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       error = e.message!;
       print(e.message);
-      if (e.code == "user-not-found") {
-        SnackBar(content: Text('Login error.'), duration: Duration(seconds: 3));
-        print("No user found for that email");
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
       }
+    } catch (e) {
+      print(e);
     }
     CircularProgressIndicator();
     return user;
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(padding: EdgeInsets.only(left: 25)),
                         Container(
                           child: Text(
-                            "Login",
+                            "Register",
                             style: TextStyle(
                                 fontSize: 34, fontWeight: FontWeight.w700),
                           ),
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(padding: EdgeInsets.only(left: 25)),
                         Container(
                           child: Text(
-                            "Login to experience new ways",
+                            "Signup to E-Gayme App.",
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontSize: 20,
@@ -101,9 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: EdgeInsets.all(25),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
-                        height: 20,
-                      ),
                       emailFormField(),
                       SizedBox(
                         height: 20,
@@ -114,9 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       submitBtton(),
                       SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
-                      registerBtton(),
                     ],
                   ),
                 )
@@ -151,7 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget emailFormField() {
-    return TextField(
+    return TextFormField(
+      controller: _emailController,
       decoration: InputDecoration(
           fillColor: Colors.grey.withOpacity(0.1),
           filled: true,
@@ -163,7 +160,6 @@ class _LoginScreenState extends State<LoginScreen> {
           hintText: "Email ID",
           prefixIcon: Icon(Icons.alternate_email)),
       keyboardType: TextInputType.emailAddress,
-      controller: _emailController,
       // validator: (String? value) {
       //   if (!validateEmail(value!)) {
       //     return "Please use valid email address";
@@ -173,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /* Widget phoneNumberFormField() {
+  Widget phoneNumberFormField() {
     return TextFormField(
       decoration: InputDecoration(
         fillColor: Colors.grey.withOpacity(0.1),
@@ -196,10 +192,11 @@ class _LoginScreenState extends State<LoginScreen> {
         return null;
       },
     );
-  }*/
+  }
 
   Widget passwordFormField() {
-    return TextField(
+    return TextFormField(
+      controller: _passwordController,
       obscureText: true,
       decoration: InputDecoration(
         fillColor: Colors.grey.withOpacity(0.1),
@@ -219,7 +216,6 @@ class _LoginScreenState extends State<LoginScreen> {
       //   return null;
       // },
       keyboardType: TextInputType.visiblePassword,
-      controller: _passwordController,
     );
   }
 
@@ -232,50 +228,26 @@ class _LoginScreenState extends State<LoginScreen> {
           )),
       onPressed: () async {
         // formkey.currentState!.validate();
-        loginStatus = true;
-        useremail = _emailController.text;
-        User? user = await loginEmailPassword(
+        User? user = await registerEmailPassword(
             email: _emailController.text,
             password: _passwordController.text,
             context: context);
         print(user?.uid);
-        if (error != "") {
+        if (error != null) {
           print("not null");
           showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("CAN'T LOGIN!"),
+                  title: Text("CAN'T SIGN UP!"),
                   content: Text(error),
                 );
               });
         }
         if (user != null) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (BuildContext context) => MyHome()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (BuildContext context) => LoginScreen()));
         }
-      },
-      child: Text(
-        "  Login  ",
-        style: TextStyle(
-          fontSize: 19,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
-  ElevatedButton registerBtton() {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          padding: new EdgeInsets.symmetric(vertical: 20.0, horizontal: 125.0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
-          )),
-      onPressed: () {
-        // formkey.currentState!.validate();
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => RegisterScreen()));
       },
       child: Text(
         "Register",
@@ -284,6 +256,32 @@ class _LoginScreenState extends State<LoginScreen> {
           fontWeight: FontWeight.w600,
         ),
       ),
+    );
+  }
+
+  Widget agreementCheckBox() {
+    return Row(
+      children: <Widget>[
+        Padding(padding: EdgeInsets.only(left: 15)),
+        Checkbox(
+          value: _value,
+          onChanged: (newValue) {
+            setState(() {
+              _value = newValue!;
+            });
+          },
+        ),
+        Text(
+          "I accept with the",
+          style: TextStyle(color: Colors.grey),
+        ),
+        TextButton(
+            onPressed: () {},
+            child: Text(
+              "Term & Conditions",
+              style: TextStyle(color: Colors.black),
+            )),
+      ],
     );
   }
 

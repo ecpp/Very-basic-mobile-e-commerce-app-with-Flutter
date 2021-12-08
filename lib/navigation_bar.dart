@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cs310group28/routes/profile.dart';
 import 'package:cs310group28/routes/cart_page.dart';
 import 'utils/colors.dart';
 import 'utils/styles.dart';
@@ -25,10 +26,10 @@ class _NavBarState extends State<NavigationBar> {
           if (loginStatus == false)
             ListTile(
                 leading: Icon(Icons.login),
-                title: Text('Sign In', style: navText),
+                title: Text('Login', style: navText),
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
                 }),
           if (loginStatus == true)
             ListTile(
@@ -46,18 +47,17 @@ class _NavBarState extends State<NavigationBar> {
                 leading: Icon(Icons.account_box),
                 title: Text('Profile', style: navText),
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => ProfilePage()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ProfileScreen()));
                 }),
           if (loginStatus == true)
             ListTile(
                 leading: const Icon(Icons.local_shipping),
-                title: const Text('Orders & Returns', style: TextStyle(fontSize: 25)),
+                title: Text('Orders & Returns', style: navText),
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => ProfilePage()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ProfileScreen()));
                 }),
-
           if (loginStatus == false) Divider(),
           ListTile(
             leading: Icon(Icons.search),

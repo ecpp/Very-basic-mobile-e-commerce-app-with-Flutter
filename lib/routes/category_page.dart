@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:cs310group28/navigation_bar.dart';
 import 'package:cs310group28/main.dart';
 
-
 class Hats extends StatefulWidget {
   @override
   _HatsState createState() => _HatsState();
@@ -14,7 +13,11 @@ class Hats extends StatefulWidget {
 
 class _HatsState extends State<Hats> {
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title:Text('Hats'),centerTitle: true,));
+    return Scaffold(
+        appBar: AppBar(
+      title: Text('Hats'),
+      centerTitle: true,
+    ));
   }
 }
 
@@ -25,7 +28,11 @@ class Dresses extends StatefulWidget {
 
 class _DressesState extends State<Dresses> {
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title:Text('Dresses'),centerTitle: true,));
+    return Scaffold(
+        appBar: AppBar(
+      title: Text('Dresses'),
+      centerTitle: true,
+    ));
   }
 }
 
@@ -36,7 +43,11 @@ class Skirts extends StatefulWidget {
 
 class _SkirtsState extends State<Skirts> {
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title:Text('Skirts'),centerTitle: true,));
+    return Scaffold(
+        appBar: AppBar(
+      title: Text('Skirts'),
+      centerTitle: true,
+    ));
   }
 }
 
@@ -47,7 +58,11 @@ class Shirts extends StatefulWidget {
 
 class _ShirtsState extends State<Shirts> {
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title:Text('Shirts'),centerTitle: true,));
+    return Scaffold(
+        appBar: AppBar(
+      title: Text('Shirts'),
+      centerTitle: true,
+    ));
   }
 }
 
@@ -58,7 +73,11 @@ class Shoes extends StatefulWidget {
 
 class _ShoesState extends State<Shoes> {
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title:Text('Shoes'),centerTitle: true,));
+    return Scaffold(
+        appBar: AppBar(
+      title: Text('Shoes'),
+      centerTitle: true,
+    ));
   }
 }
 
@@ -69,6 +88,10 @@ class AllProducts extends StatefulWidget {
 
 class _AllProductsState extends State<AllProducts> {
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title:Text('All Products'),centerTitle: true,));
+    return Scaffold(
+        appBar: AppBar(
+      title: Text('All Products'),
+      centerTitle: true,
+    ));
   }
 }
