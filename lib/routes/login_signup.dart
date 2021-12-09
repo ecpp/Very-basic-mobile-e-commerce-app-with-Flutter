@@ -190,25 +190,23 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget googleSignIn() {
     return MaterialButton(
         color: Colors.grey[800],
-        child : Padding(
-          padding : EdgeInsets.all(10),
-          child : Wrap(
-            crossAxisAlignment : WrapCrossAlignment.center,
-            children : [
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
               Image.network(
                   'http://pngimg.com/uploads/google/google_PNG19635.png',
                   height: 30,
-                  width : 30
-              ),
+                  width: 30),
               SizedBox(width: 12),
               Text('Sign in with Google'),
-            ] ,
+            ],
           ),
         ),
         onPressed: () {
           signup(context);
-        }
-    );
+        });
   }
 
   //FIREBASE FOR GOOGLE SIGN-IN
@@ -217,9 +215,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> signup(BuildContext context) async {
     loginStatus = true;
     final GoogleSignIn googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount ? googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
     if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
       final AuthCredential authCredential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
           accessToken: googleSignInAuthentication.accessToken);
@@ -227,6 +227,10 @@ class _LoginScreenState extends State<LoginScreen> {
       // Getting users credential
       UserCredential result = await auth.signInWithCredential(authCredential);
       User? user = result.user;
+      //print("DATALAR");
+      //print(result.additionalUserInfo.username);
+      print(result.user!.email);
+      useremail = result.user!.email!;
 
       if (user != null) {
         Navigator.of(context).pushReplacement(
@@ -234,9 +238,6 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
   }
-
-
-
 
   /* Widget phoneNumberFormField() {
     return TextFormField(
