@@ -26,18 +26,27 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   String error = "";
-  Future<User?> loginEmailPassword(
+  static Future<User?> loginEmailPassword(
       {required String email,
       required String password,
       required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
+    String loginError;
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
-      error = e.message!;
+      loginError = e.message!;
       print(e.message);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("CAN'T LOGIN!"),
+              content: Text(loginError),
+            );
+          });
       if (e.code == "user-not-found") {
         SnackBar(content: Text('Login error.'), duration: Duration(seconds: 3));
         print("No user found for that email");
@@ -265,21 +274,11 @@ class _LoginScreenState extends State<LoginScreen> {
         loginStatus = true;
         useremail = _emailController.text;
         User? user = await loginEmailPassword(
-            email: _emailController.text,
-            password: _passwordController.text,
-            context: context);
+          email: _emailController.text,
+          password: _passwordController.text,
+          context: context,
+        );
         print(user?.uid);
-        if (error != "") {
-          print("not null");
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("CAN'T LOGIN!"),
-                  content: Text(error),
-                );
-              });
-        }
         if (user != null) {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (BuildContext context) => MyHome()));
