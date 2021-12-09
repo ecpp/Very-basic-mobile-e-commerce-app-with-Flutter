@@ -18,20 +18,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  String error = "404";
 
-  Future<User?> registerEmailPassword(
+  static Future<User?> registerEmailPassword(
       {required String email,
       required String password,
       required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
+    String registerError;
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
-      error = e.message!;
+      print("not null");
+      registerError = e.message!;
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("CAN'T SIGN UP!"),
+              content: Text(registerError),
+            );
+          });
       print(e.message);
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -233,17 +242,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             password: _passwordController.text,
             context: context);
         print(user?.uid);
-        if (error != null) {
-          print("not null");
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("CAN'T SIGN UP!"),
-                  content: Text(error),
-                );
-              });
-        }
         if (user != null) {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (BuildContext context) => LoginScreen()));
