@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:cs310group28/routes/profile.dart';
 import 'package:cs310group28/routes/register_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 User? user;
 String useremail = "aa";
@@ -188,29 +187,56 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget googleSignIn(){
+  Widget googleSignIn() {
     return MaterialButton(
-      color: Colors.grey[800],
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            Image.network(
-                'http://pngimg.com/uploads/google/google_PNG19635.png',
-                height: 30,
-                width: 30
-            ),
-            SizedBox(width: 12),
-            Text('Sign in with Google'),
-          ],
+        color: Colors.grey[800],
+        child : Padding(
+          padding : EdgeInsets.all(10),
+          child : Wrap(
+            crossAxisAlignment : WrapCrossAlignment.center,
+            children : [
+              Image.network(
+                  'http://pngimg.com/uploads/google/google_PNG19635.png',
+                  height: 30,
+                  width : 30
+              ),
+              SizedBox(width: 12),
+              Text('Sign in with Google'),
+            ] ,
+          ),
         ),
-      ),
         onPressed: () {
           signup(context);
         }
     );
   }
+
+  //FIREBASE FOR GOOGLE SIGN-IN
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<void> signup(BuildContext context) async {
+    loginStatus = true;
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignInAccount ? googleSignInAccount = await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+      final AuthCredential authCredential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
+
+      // Getting users credential
+      UserCredential result = await auth.signInWithCredential(authCredential);
+      User? user = result.user;
+
+      if (user != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => MyHome()));
+      }
+    }
+  }
+
+
+
 
   /* Widget phoneNumberFormField() {
     return TextFormField(
@@ -324,25 +350,5 @@ class _LoginScreenState extends State<LoginScreen> {
   bool validatePassword(String value) {
     RegExp regex = new RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
     return (!regex.hasMatch(value) ? false : true);
-  }
-}
-// function to implement the google signin
-
-// creating firebase instance
-final FirebaseAuth auth = FirebaseAuth.instance;
-
-Future<void> signup(BuildContext context) async {
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-  final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-  if (googleSignInAccount != null) {
-    final GoogleSignInAuthentication googleSignInAuthentication =
-    await googleSignInAccount.authentication;
-    final AuthCredential authCredential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken);
-
-    // Getting users credential
-    UserCredential result = await auth.signInWithCredential(authCredential);
-    User? user = result.user;
   }
 }
