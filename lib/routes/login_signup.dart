@@ -1,7 +1,9 @@
 import 'package:cs310group28/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:cs310group28/routes/profile.dart';
 import 'package:cs310group28/routes/register_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -38,7 +40,9 @@ class _LoginScreenState extends State<LoginScreen> {
     } on FirebaseAuthException catch (e) {
       loginError = e.message!;
       print(e.message);
+
       showDialog(
+
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(

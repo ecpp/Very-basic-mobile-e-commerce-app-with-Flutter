@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cs310group28/routes/welcome_page.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'onboard/onboard.dart';
 import 'services/analytics_service.dart';
 import 'package:cs310group28/routes/profile.dart';
