@@ -8,6 +8,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
+    
     return Scaffold(appBar: AppBar(title:Text('Profile Page'),centerTitle: true,));
   }
 }

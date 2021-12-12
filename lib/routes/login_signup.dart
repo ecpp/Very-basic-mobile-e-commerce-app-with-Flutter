@@ -3,14 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:cs310group28/routes/profile.dart';
 import 'package:cs310group28/routes/register_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+
+
 User? user;
 String useremail = "aa";
-
+int tries = 0;
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -23,7 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
   String email = '';
   String password = '';
   final formkey = GlobalKey<FormState>();
-
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   String error = "";
@@ -40,14 +42,18 @@ class _LoginScreenState extends State<LoginScreen> {
     } on FirebaseAuthException catch (e) {
       loginError = e.message!;
       print(e.message);
+      tries = tries +1;
+      if(tries == 3)
+        FirebaseCrashlytics.instance.crash();
 
       showDialog(
-
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text("CAN'T LOGIN!"),
               content: Text(loginError),
+
+
             );
           });
       if (e.code == "user-not-found") {
