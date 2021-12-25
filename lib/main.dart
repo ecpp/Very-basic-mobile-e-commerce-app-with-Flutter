@@ -15,6 +15,8 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'onboard/onboard.dart';
 import 'services/analytics_service.dart';
 import 'package:cs310group28/routes/profile.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 
 bool loginStatus = false;
 int? isViewed;
@@ -99,7 +101,21 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
   @override
   Widget build(BuildContext context) {
+
+    Future<Widget> _getImage(BuildContext context, String imageName) async{
+      late Image image;
+      await FireStorageService.loadImage(context, imageName).then((value){
+        image = Image.network(
+          value.toString(),
+          fit: BoxFit.scaleDown,
+        );
+      });
+      return image;
+    }
+
+
     return Scaffold(
+
       drawer: NavigationBar(),
 
       appBar: AppBar(
@@ -195,6 +211,8 @@ class _MyHomeState extends State<MyHome> {
           width: 50.0,
           height: 70.0,
         ),
+
+
         Container(
             child:
                 Text('Hats', textAlign: TextAlign.center, style: navTextBlack),
@@ -218,9 +236,19 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
-                  'http://91.191.173.36/assets/CategoryHat.jpg',
-                  fit: BoxFit.cover),
+              child: FutureBuilder<Widget>(
+                future: _getImage(context, "hat.jpg"),
+                builder: (context, snapshot){
+                  if(snapshot.connectionState == ConnectionState.done){
+                    return Container(
+                      width: MediaQuery.of(context).size.width/ 1.2,
+                      height: MediaQuery.of(context).size.width/ 1.2,
+                      child:  snapshot.data,
+                    );
+                  }
+                  return Container();
+                },
+              )
             ),
           ),
         ),
@@ -247,9 +275,19 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
-                  'http://91.191.173.36/assets/CategoryDress.jpg',
-                  fit: BoxFit.cover),
+              child: FutureBuilder<Widget>(
+                future: _getImage(context, "dress.jpg"),
+                builder: (context, snapshot){
+                  if(snapshot.connectionState == ConnectionState.done){
+                    return Container(
+                      width: MediaQuery.of(context).size.width/ 1.2,
+                      height: MediaQuery.of(context).size.width/ 1.2,
+                      child:  snapshot.data,
+                    );
+                  }
+                  return Container();
+                },
+              )
             ),
           ),
         ),
@@ -276,9 +314,19 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
-                  'http://91.191.173.36/assets/CategorySkirt.jpg',
-                  fit: BoxFit.fill),
+              child: FutureBuilder<Widget>(
+                future: _getImage(context, "skirt.jpg"),
+                builder: (context, snapshot){
+                  if(snapshot.connectionState == ConnectionState.done){
+                    return Container(
+                      width: MediaQuery.of(context).size.width/ 1.2,
+                      height: MediaQuery.of(context).size.width/ 1.2,
+                      child:  snapshot.data,
+                    );
+                  }
+                  return Container();
+                },
+              )
             ),
           ),
         ),
@@ -305,9 +353,19 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
-                  'http://91.191.173.36/assets/CategoryShirt.jpg',
-                  fit: BoxFit.fill),
+              child: FutureBuilder<Widget>(
+                future: _getImage(context, "shirt.jpg"),
+                builder: (context, snapshot){
+                  if(snapshot.connectionState == ConnectionState.done){
+                    return Container(
+                      width: MediaQuery.of(context).size.width/ 1.2,
+                      height: MediaQuery.of(context).size.width/ 1.2,
+                      child:  snapshot.data,
+                    );
+                  }
+                  return Container();
+                },
+              )
             ),
           ),
         ),
@@ -334,14 +392,31 @@ class _MyHomeState extends State<MyHome> {
             height: 400,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.network(
-                  'http://91.191.173.36/assets/CategoryShoe.jpg',
-                  fit: BoxFit.cover),
+              child: FutureBuilder<Widget>(
+                future: _getImage(context, "shoes.webp"),
+                builder: (context, snapshot){
+                  if(snapshot.connectionState == ConnectionState.done){
+                    return Container(
+                      width: MediaQuery.of(context).size.width/ 1.2,
+                      height: MediaQuery.of(context).size.width/ 1.2,
+                      child:  snapshot.data,
+                    );
+                  }
+                  return Container();
+                },
+              )
             ),
           ),
         ),
       ]),
       //resizeToAvoidBottomInset: false
     );
+  }
+}
+
+class FireStorageService extends ChangeNotifier{
+  FireStorageService();
+  static Future<dynamic> loadImage(BuildContext context, String Image) async{
+    return await FirebaseStorage.instance.ref().child(Image).getDownloadURL();
   }
 }
