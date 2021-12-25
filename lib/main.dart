@@ -16,7 +16,7 @@ import 'onboard/onboard.dart';
 import 'services/analytics_service.dart';
 import 'package:cs310group28/routes/profile.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 bool loginStatus = false;
 int? isViewed;
@@ -48,7 +48,10 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
+
+
 void setValue() async {
+
   final prefs = await SharedPreferences.getInstance();
   launchCount = prefs.getInt('counter') ?? 0;
   prefs.setInt('counter', launchCount + 1);
@@ -58,6 +61,8 @@ void setValue() async {
     print("Not first launch");
   }
 }
+
+
 
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
