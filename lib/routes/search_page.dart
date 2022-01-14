@@ -1,31 +1,39 @@
 import 'package:cs310group28/main.dart';
 import 'package:cs310group28/navigation_bar.dart';
+import 'package:cs310group28/routes/category_page.dart';
 import 'package:cs310group28/utils/dimension.dart';
 import 'package:flutter/material.dart';
-import 'package:cs310group28/routes/category_page.dart';
-
 
 Future<Widget> _getImage(BuildContext context, String imageName) async {
   late Image image;
   await FireStorageService.loadImage(context, imageName).then((value) {
     image = Image.network(
       value.toString(),
-      fit: BoxFit.fitWidth,
+      fit: BoxFit.fill,
     );
   });
   return image;
 }
 
-Product BarbourTrilby = Product(productname: "Barbour Trilby", cost: 25);
-Product OldWest = Product(productname: "Old West", cost: 15);
-Product FlowerField = Product(productname: "Flower Field", cost: 30);
-Product SpringBreeze = Product(productname: "Spring Breeze", cost: 40);
-Product Alexis = Product(productname: "Alexis", cost: 30);
-Product DarkSpring = Product(productname: "Dark Spring", cost: 40);
-Product Adventure = Product(productname: "Adventure", cost: 25);
-Product DenimShirt = Product(productname: "Denim Shirt", cost: 40);
-Product Whiteex = Product(productname: "Whiteex", cost: 25);
-Product Blueiva = Product(productname: "Blueiva", cost: 40);
+Product BarbourTrilby = Product(
+    productname: "Barbour Trilby", cost: 25, searchname: "BarbourTrilby");
+Product OldWest =
+    Product(productname: "Old West", cost: 15, searchname: "OldWest");
+Product FlowerField =
+    Product(productname: "Flower Field", cost: 30, searchname: "FlowerField");
+Product SpringBreeze =
+    Product(productname: "Spring Breeze", cost: 40, searchname: "SpringBreeze");
+Product Alexis = Product(productname: "Alexis", cost: 30, searchname: "Alexis");
+Product DarkSpring =
+    Product(productname: "Dark Spring", cost: 40, searchname: "DarkSpring");
+Product Adventure =
+    Product(productname: "Adventure", cost: 25, searchname: "Adventure");
+Product DenimShirt =
+    Product(productname: "Denim Shirt", cost: 40, searchname: "DenimShirt");
+Product Whiteex =
+    Product(productname: "Whiteex", cost: 25, searchname: "Whiteex");
+Product Blueiva =
+    Product(productname: "Blueiva", cost: 40, searchname: "Blueiva");
 List<Product> items = [
   BarbourTrilby,
   OldWest,
@@ -41,6 +49,7 @@ List<Product> items = [
 
 late String searchValue;
 String currentItem = "";
+List<Product> searchRes = [];
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -111,8 +120,20 @@ class _SearchPageState extends State<SearchPage2> {
                     if (_formKey.currentState!.validate()) {
                       // Process data.
                       //print(searchValue);
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => SearchResults()));
+                      if (searchRes.isNotEmpty) {
+                        for (var elem in searchRes) {
+                          searchRes.remove(elem);
+                        }
+                      }
+                      for (var elem in items) {
+                        String test=elem.productname.toLowerCase();
+                        String testSearch=searchValue.toLowerCase();
+                        if (test.contains(testSearch) == true) {
+                          searchRes.add(elem);
+                        }
+                      }
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SearchResults()));
                     }
                   },
                   child: const Text('Search'),
@@ -133,7 +154,7 @@ class SearchResults extends StatefulWidget {
 //late Future<Product> data;
 
 class _SearchResultsState extends State<SearchResults> {
-  late List data;
+  //late List data;
 
   @override
   void initState() {
@@ -141,10 +162,10 @@ class _SearchResultsState extends State<SearchResults> {
     //Product temp=Product(productname:"asd",cost:10);
     //data.add(temp);
     super.initState();
-    this.findItem().whenComplete((){setState((){});});
-
+    //this.findItem().whenComplete((){setState((){});});
   }
 
+/*
   Future findItem() async{
     //data.add(BarbourTrilby);
     setState((){for (var elem in items) {
@@ -155,9 +176,11 @@ class _SearchResultsState extends State<SearchResults> {
 
   }
 
+ */
+
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationBar(),
+      //drawer: NavigationBar(),
       appBar: AppBar(
           backgroundColor: Colors.black,
           centerTitle: true,
@@ -170,9 +193,10 @@ class _SearchResultsState extends State<SearchResults> {
   Widget _buildListView() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemCount: data == null ? 0 : data.length,
+        itemCount: searchRes == null ? 0 : searchRes.length,
         itemBuilder: (context, index) {
-          return _buildImageColumn(data[index]);
+            return _buildImageColumn(searchRes[index]);
+
           // return _buildRow(data[index]);
         });
   }
@@ -188,15 +212,10 @@ class _SearchResultsState extends State<SearchResults> {
           children: [
             InkWell(
               onTap: () {
-                setState(() {
-                  currentItem = item['productname'];
-                });
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => MyHome()));
               },
               child: Container(
-                  width: 300,
-                  height: 400,
+                  width: 350,
+                  height: 350,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Container(
@@ -206,15 +225,14 @@ class _SearchResultsState extends State<SearchResults> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),
                           child: FutureBuilder<Widget>(
-                            future: _getImage(context, "FlowerField.jpg"),
+                            future:
+                                _getImage(context, item.searchname + ".jpg"),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                   ConnectionState.done) {
                                 return Container(
-                                  width:
-                                  MediaQuery.of(context).size.width / 2,
-                                  height:
-                                  MediaQuery.of(context).size.width / 2,
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  height: MediaQuery.of(context).size.width / 2,
                                   child: snapshot.data,
                                 );
                               }
@@ -225,7 +243,7 @@ class _SearchResultsState extends State<SearchResults> {
                   ),
                   margin: EdgeInsets.only(bottom: 20.0, top: 20.0)),
             ),
-            Text(item['productname'], style: TextStyle(fontSize: 25.0)),
+            Text(item.productname, style: TextStyle(fontSize: 25.0)),
             _buildRow(item)
           ],
         ),
@@ -233,13 +251,15 @@ class _SearchResultsState extends State<SearchResults> {
 
   Widget _buildRow(dynamic item) {
     return ListTile(
-      title: Text("Price: \$" + item['cost'].toString(),
+      title: Text("Price: \$" + item.cost.toString(),
           style: TextStyle(fontSize: 20.0)),
       trailing: Icon(Icons.add_box_rounded),
       onTap: () {
         setState(() {
-          Product temp =
-              Product(productname: item['productname'], cost: item['cost']);
+          Product temp = Product(
+              productname: item.productname,
+              cost: item.cost,
+              searchname: item.searchname);
 
           shoppingCart.add(temp);
           totalCost = totalCost + temp.cost;

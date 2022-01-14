@@ -10,10 +10,12 @@ double totalCost = 0;
 class Product {
   String productname;
   int cost;
+  String searchname;
 
   Product({
     required this.productname,
     required this.cost,
+    required this.searchname,
   });
 }
 
@@ -22,7 +24,7 @@ Future<Widget> _getImage(BuildContext context, String imageName) async {
   await FireStorageService.loadImage(context, imageName).then((value) {
     image = Image.network(
       value.toString(),
-      fit: BoxFit.fitWidth,
+      fit: BoxFit.fill,
     );
   });
   return image;
@@ -99,7 +101,7 @@ class _HatsState extends State<Hats> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Barbour Trilby", cost: 25);
+                            Product(productname: "Barbour Trilby", cost: 25,searchname: "BarbourTrilby");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -163,7 +165,7 @@ class _HatsState extends State<Hats> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Old West", cost: 15);
+                            Product(productname: "Old West", cost: 15,searchname: "OldWest");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -245,7 +247,7 @@ class _DressesState extends State<Dresses> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Flower Field", cost: 30);
+                            Product(productname: "Flower Field", cost: 30, searchname: "FlowerField");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -309,7 +311,7 @@ class _DressesState extends State<Dresses> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Spring Breeze", cost: 40);
+                            Product(productname: "Spring Breeze", cost: 40, searchname: "SpringBreeze");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -389,7 +391,7 @@ class _SkirtsState extends State<Skirts> {
                     trailing: const Icon(Icons.add_box_rounded),
                     onTap: () {
                       setState(() {
-                        Product temp = Product(productname: "Alexis", cost: 30);
+                        Product temp = Product(productname: "Alexis", cost: 30, searchname: "Alexis");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -452,7 +454,7 @@ class _SkirtsState extends State<Skirts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Dark Spring", cost: 40);
+                            Product(productname: "Dark Spring", cost: 40, searchname: "DarkSpring");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -533,7 +535,7 @@ class _ShirtsState extends State<Shirts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Adventure", cost: 25);
+                            Product(productname: "Adventure", cost: 25,searchname: "Adventure");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -596,7 +598,7 @@ class _ShirtsState extends State<Shirts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Denim Shirt", cost: 40);
+                            Product(productname: "Denim Shirt", cost: 40, searchname: "DenimShirt");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -677,7 +679,7 @@ class _ShoesState extends State<Shoes> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Whiteex", cost: 25);
+                            Product(productname: "Whiteex", cost: 25, searchname: "Whiteex");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -740,7 +742,7 @@ class _ShoesState extends State<Shoes> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Blueiva", cost: 40);
+                            Product(productname: "Blueiva", cost: 40, searchname: "Blueiva");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -822,7 +824,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Barbour Trilby", cost: 25);
+                            Product(productname: "Barbour Trilby", cost: 25, searchname: "BarbourTrilby");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -886,7 +888,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Old West", cost: 15);
+                            Product(productname: "Old West", cost: 15, searchname: "OldWest");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -950,7 +952,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Flower Field", cost: 30);
+                            Product(productname: "Flower Field", cost: 30, searchname: "FlowerField");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -1014,7 +1016,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Spring Breeze", cost: 40);
+                            Product(productname: "Spring Breeze", cost: 40, searchname: "SpringBreeze");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -1076,7 +1078,7 @@ class _AllProductsState extends State<AllProducts> {
                     trailing: const Icon(Icons.add_box_rounded),
                     onTap: () {
                       setState(() {
-                        Product temp = Product(productname: "Alexis", cost: 30);
+                        Product temp = Product(productname: "Alexis", cost: 30, searchname: "Alexis");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -1139,7 +1141,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Dark Spring", cost: 40);
+                            Product(productname: "Dark Spring", cost: 40, searchname: "DarkSpring");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -1202,7 +1204,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Adventure", cost: 25);
+                            Product(productname: "Adventure", cost: 25, searchname: "Adventure");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -1265,7 +1267,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Denim Shirt", cost: 40);
+                            Product(productname: "Denim Shirt", cost: 40, searchname: "DenimShirt");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -1328,7 +1330,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Whiteex", cost: 25);
+                            Product(productname: "Whiteex", cost: 25, searchname: "Whiteex");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
@@ -1391,7 +1393,7 @@ class _AllProductsState extends State<AllProducts> {
                     onTap: () {
                       setState(() {
                         Product temp =
-                            Product(productname: "Blueiva", cost: 40);
+                            Product(productname: "Blueiva", cost: 40, searchname: "Blueiva");
                         shoppingCart.add(temp);
                         totalCost = totalCost + temp.cost;
                       });
