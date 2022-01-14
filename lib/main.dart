@@ -242,7 +242,7 @@ class _MyHomeState extends State<MyHome> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: FutureBuilder<Widget>(
-                future: _getImage(context, "hat.jpg"),
+                future: _getImage(context, "CategoryHat.jpg"),
                 builder: (context, snapshot){
                   if(snapshot.connectionState == ConnectionState.done){
                     return Container(
@@ -281,7 +281,7 @@ class _MyHomeState extends State<MyHome> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: FutureBuilder<Widget>(
-                future: _getImage(context, "dress.jpg"),
+                future: _getImage(context, "CategoryDress.jpg"),
                 builder: (context, snapshot){
                   if(snapshot.connectionState == ConnectionState.done){
                     return Container(
@@ -320,7 +320,7 @@ class _MyHomeState extends State<MyHome> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: FutureBuilder<Widget>(
-                future: _getImage(context, "skirt.jpg"),
+                future: _getImage(context, "CategorySkirt.jpg"),
                 builder: (context, snapshot){
                   if(snapshot.connectionState == ConnectionState.done){
                     return Container(
@@ -359,7 +359,7 @@ class _MyHomeState extends State<MyHome> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: FutureBuilder<Widget>(
-                future: _getImage(context, "shirt.jpg"),
+                future: _getImage(context, "CategoryShirt.jpg"),
                 builder: (context, snapshot){
                   if(snapshot.connectionState == ConnectionState.done){
                     return Container(
@@ -398,7 +398,7 @@ class _MyHomeState extends State<MyHome> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: FutureBuilder<Widget>(
-                future: _getImage(context, "shoes.webp"),
+                future: _getImage(context, "CategoryShoe.jpg"),
                 builder: (context, snapshot){
                   if(snapshot.connectionState == ConnectionState.done){
                     return Container(
