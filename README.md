@@ -1,3 +1,5 @@
 # CS310 FLUTTER PROJECT
 
-Group 28's E-Commerce Application
+Very basic e-commerce app for mobile.
+Firebase as backend.
+Frontend created with paint.
